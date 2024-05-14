@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Dimensions, Platform } from 'react-native';
+import { SafeAreaView, Dimensions, Platform } from 'react-native';
 
 import { WebView } from 'react-native-webview';
 
@@ -24,10 +24,11 @@ const StreambtwIframe = ({ url }: Props) => {
   const iframeUrl = url 
 
   return (
-    <View style={{ width: screenWidth, height: screenHeight }}>
+    <SafeAreaView style={{ width: "100%", height: "100%", flex:1 }}>
       <WebView
+       
         source={{ uri: iframeUrl }}
-        style={{ flex: 1 }}
+        style={{ flex: 1 , alignContent:"center",justifyContent:"center" , alignItems:"center"}} 
         javaScriptEnabled={true}
         domStorageEnabled={true}
         originWhitelist={['https://streambtw.com']}
@@ -35,7 +36,7 @@ const StreambtwIframe = ({ url }: Props) => {
         androidHardwareAccelerationByDefault={Platform.OS === 'android'}
 
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
