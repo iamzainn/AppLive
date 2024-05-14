@@ -6,9 +6,9 @@ import { useLocalSearchParams,  } from 'expo-router';
 const StreamScreen = () => {
   const { url } = useLocalSearchParams();
   return (
-    <SafeAreaView style={{flex:1, justifyContent:"center",alignItems:"center"}} >
+    <SafeAreaView style={{flex:1, justifyContent:"center",alignItems:"center",backgroundColor:"white"}} >
       <StreambtwIframe url={url as string} ></StreambtwIframe>
-      <Text>Full Width</Text>
+      {/* <Text style={{flex:1}}>Full Width</Text> */}
     </SafeAreaView>
   )
 }
