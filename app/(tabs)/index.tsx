@@ -1,16 +1,24 @@
-import { View, Text } from 'react-native'
+import { ActivityIndicator, View } from 'react-native'
 import React from 'react'
-import StreambtwIframe from '@/components/Stream'
-import router, { Link } from 'expo-router'
+import { getSports } from '@/utils/f'
+import { useQuery } from '@tanstack/react-query'
+
 
 const index = () => {
+
+   const {data,isLoading,isError} = useQuery({
+    queryKey:['Sports'],
+    queryFn:()=>getSports(),
+   })
+
+
+   if(isLoading){
+    return <ActivityIndicator style={{flex:1, alignItems:"center",justifyContent:"center"}}></ActivityIndicator>
+   }
+
   return (
     <View style={{ flex: 1,  backgroundColor:"white"}}>
-      <Text>index</Text>
-      <Link asChild href={"/StreamScreen"} style={{padding:20}}>
-        <Text>IPL</Text>
-            </Link>
-  
+      
     </View>
   )
 }
