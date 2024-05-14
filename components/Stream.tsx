@@ -3,7 +3,11 @@ import { View, Dimensions, Platform } from 'react-native';
 
 import { WebView } from 'react-native-webview';
 
-const StreambtwIframe = () => {
+type Props = {
+  url: string;
+};
+
+const StreambtwIframe = ({ url }: Props) => {
   const [screenWidth, setScreenWidth] = useState(Dimensions.get('window').width);
   const [screenHeight, setScreenHeight] = useState(Dimensions.get('window').height);
   
@@ -17,7 +21,7 @@ const StreambtwIframe = () => {
     
   }, []);
 
-  const iframeUrl = 'https://streambtw.com/iframe/e1.php' 
+  const iframeUrl = url 
 
   return (
     <View style={{ width: screenWidth, height: screenHeight }}>
