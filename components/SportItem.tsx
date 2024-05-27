@@ -22,7 +22,7 @@ const SportItem = ({ item }: { item: Sports }) => {
       <View style={styles.info}>
         <Text style={styles.name}>{name}</Text>
         <View style={styles.watchLiveContainer}>
-          {isAvaliable ? ( // Corrected typo for consistency
+          {isAvaliable ? ( 
             <TouchableOpacity style={styles.watchLiveButton} onPress={handleWatchLivePress}>
               <Text style={styles.watchLiveText}>Watch Live</Text>
             </TouchableOpacity>

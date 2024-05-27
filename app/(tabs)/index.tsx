@@ -2,13 +2,12 @@ import { ActivityIndicator, FlatList, View,Text } from 'react-native'
 import React from 'react'
 import { getSports } from '@/utils/f'
 import { useQuery } from '@tanstack/react-query'
-import { Link } from 'expo-router'
+
 import SportItem from '@/components/SportItem'
 
 
 const index = () => {
-
-   const {data:Sports,isLoading,isError} = useQuery({
+   const {data:Sports,isLoading} = useQuery({
     queryKey:['Sports'],
     queryFn:()=>getSports(),
    })

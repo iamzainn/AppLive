@@ -37,9 +37,11 @@
       "router": {
         "origin": false
       },
+      "clerkPublishableKey":"pk_test_YWNlLWFyYWNobmlkLTc4LmNsZXJrLmFjY291bnRzLmRldiQ",
       "eas": {
         "projectId": "52ba43d0-b778-407f-a6b7-2acee4d1367c"
       }
     }
+    
   }
 }

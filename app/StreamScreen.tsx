@@ -8,7 +8,6 @@ const StreamScreen = () => {
   return (
     <SafeAreaView style={{flex:1, justifyContent:"center",alignItems:"center",backgroundColor:"white"}} >
       <StreambtwIframe url={url as string} ></StreambtwIframe>
-      {/* <Text style={{flex:1}}>Full Width</Text> */}
     </SafeAreaView>
   )
 }

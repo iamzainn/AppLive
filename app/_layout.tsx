@@ -1,13 +1,40 @@
+
+import registerNNPushToken from 'native-notify';
+
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useFonts } from 'expo-font';
+
 import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
 
-import { useColorScheme } from '@/components/useColorScheme';
+
 import { QueryClient, QueryClientProvider,useQueryClient } from '@tanstack/react-query';
+
+import Constants from "expo-constants";
+import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
+import SigninScreen from '@/Screens/SigninScreen';
+import * as SecureStore from "expo-secure-store";
+
+const tokenCache = {
+  async getToken(key: string) {
+    try {
+      return SecureStore.getItemAsync(key);
+    } catch (err) {
+      return null;
+    }
+  },
+  async saveToken(key: string, value: string) {
+    try {
+      return SecureStore.setItemAsync(key, value);
+    } catch (err) {
+      return;
+    }
+  },
+};
+
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -43,25 +70,37 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
+  return (
+    <ClerkProvider
+  tokenCache={tokenCache}
+  publishableKey={Constants.expoConfig?.extra?.clerkPublishableKey as string}>
+      <SignedIn>
+        <RootLayoutNav />
+      </SignedIn>
+      <SignedOut>
+        <SigninScreen />
+      </SignedOut>
+  </ClerkProvider>
+  )
+  
 }
 
 function RootLayoutNav() {
-  const colorScheme = useColorScheme();
+  registerNNPushToken(21498, '5hVMJXdtUJ7FE8wCK5kYf1');
 
   
   const client = new QueryClient();
 
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+  
       <QueryClientProvider client={client} >
       <Stack>
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
-      </Stack>
+             </Stack>
       </QueryClientProvider>
-     
-    </ThemeProvider>
+    
   );
 }
+
+
